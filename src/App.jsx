@@ -1,14 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { TodoCounter } from './components/TodoCounter'
+import { TodoSearch } from './components/TodoSearch'
+import { TodoList } from './components/TodoList'
+import { TodoItem } from './components/TodoItem'
+import { CreateTodoButtom } from './components/CreateTodoButtom'
+
+const todos = [
+  { text: "Cut onions", completed: false },
+  { text: "Take the React's introcourse", completed: false },
+  { text: "Cry with the weeping woman", completed: false }
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+      <TodoCounter />
+      <TodoSearch />
+      <TodoList>
+        {todos.map(todo => (<TodoItem key={todo.text} text={todo.text} />))}
+      </TodoList>
+      <CreateTodoButtom />
+    </>
   )
 }
 
