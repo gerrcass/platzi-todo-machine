@@ -6,7 +6,7 @@ const TodosContext = createContext()
 
 const TodosProvider = ({ children }) => {
 
-    const { item: todos, setItem: setTodos, loading, error, updateLocalStorage } = useLocalStorage()
+    const { item: todos, setItem: setTodos, loading, error } = useLocalStorage()
     const [searchInput, setSearchInput] = useState('')
     const [openModal, setOpenModal] = useState(false)
 
@@ -21,17 +21,12 @@ const TodosProvider = ({ children }) => {
 
     const completedTodos = todos.filter(todo => todo.completed === true).length
 
-    const updateTodos = (newTodos) => {
-        setTodos(newTodos)
-        updateLocalStorage(newTodos)
-    }
-
     const addTodo = (text) => {
         const todoAlreadyExist = todos.some(todo => todo.text.toLowerCase().trim() === text.toLowerCase().trim())
         if (todoAlreadyExist) {
             return 'Item already exists.'
         } else {
-            updateTodos([...todos, { text: text.trim(), completed: false }])
+            setTodos([...todos, { text: text.trim(), completed: false }])
         }
     }
 
@@ -40,12 +35,12 @@ const TodosProvider = ({ children }) => {
             return todo.text === text ? { ...todo, completed: !todo.completed } : todo
 
         })
-        updateTodos(newTodos)
+        setTodos(newTodos)
 
     }
     const deleteTodo = (text) => {
         const newTodos = todos.filter(todo => todo.text !== text)
-        updateTodos(newTodos)
+        setTodos(newTodos)
     }
 
     return (

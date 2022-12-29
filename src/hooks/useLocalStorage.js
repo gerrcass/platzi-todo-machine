@@ -24,16 +24,13 @@ const useLocalStorage = () => {
             setError(true)
         }
         setLoading(false) //set 'true' for testing <LoadingState />
-    }, [])
+    },[])
 
-    const removeLocalStorage = () => {
-        localStorage.removeItem(localStorageKey)
-    }
-    const updateLocalStorage = (todos) => {
-        localStorage.setItem(localStorageKey, JSON.stringify(todos))
-    }
+    useEffect(()=>{
+        localStorage.setItem(localStorageKey, JSON.stringify(item))
+    },[item])
 
-    return { item, setItem, loading, error, removeLocalStorage, updateLocalStorage }
+    return { item, setItem, loading, error }
 }
 
 export { useLocalStorage }
