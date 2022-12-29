@@ -10,17 +10,12 @@ const TodosProvider = ({ children }) => {
     const [searchInput, setSearchInput] = useState('')
     const [openModal, setOpenModal] = useState(false)
 
-
-
-
     let todosFiltered = []
     if (searchInput.length === 0) {
         todosFiltered = todos
     } else {
         todosFiltered = todos.filter(todo => todo.text.toLowerCase().includes(searchInput.toLowerCase()))
     }
-
-
 
     const count = todos.length
 

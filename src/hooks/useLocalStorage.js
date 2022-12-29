@@ -10,22 +10,20 @@ const localStorageKey = 'TODO_MACHINE_APP'
 const todosLocalStorage = localStorage.getItem(localStorageKey)
 
 const useLocalStorage = () => {
-    const [item, setItem] = useState(initialState)
+    const [item, setItem] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
         try {
+            //throw new Error('Testing <ErrorState /> component')
             todosLocalStorage ? setItem(JSON.parse(todosLocalStorage)) : setItem(initialState)
+
         } catch (error) {
             console.log(error)
             setError(true)
         }
-        setLoading(false)
-
-        /* return ()=>{
-            removeLocalStorage()
-        } */
+        setLoading(false) //set 'true' for testing <LoadingState />
     }, [])
 
     const removeLocalStorage = () => {
