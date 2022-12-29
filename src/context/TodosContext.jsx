@@ -29,7 +29,7 @@ const TodosProvider = ({ children }) => {
     const addTodo = (text) => {
         const todoAlreadyExist = todos.some(todo => todo.text.toLowerCase().includes(text.toLowerCase()))
         if (todoAlreadyExist) {
-            alert('Todo already exist!')
+            return 'Item already exists.'
         } else {
             setTodos([...todos, { text, completed: false }])
         }

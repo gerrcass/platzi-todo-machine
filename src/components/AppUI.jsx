@@ -6,6 +6,7 @@ import { CreateTodoButtom } from './CreateTodoButtom'
 import { Card } from './Card'
 import { useTodos } from '../hooks/useTodos'
 import { Modal } from './Modal'
+import { TodoForm } from './TodoForm'
 
 
 const AppUI = () => {
@@ -21,7 +22,8 @@ const AppUI = () => {
                 {todosFiltered.map(todo => (<TodoItem key={todo.text} text={todo.text} />))}
             </TodoList>
 
-            {!!openModal && <Modal />}
+            {!!openModal && <Modal><TodoForm /></Modal>}
+
             <CreateTodoButtom />
         </Card>
     )
