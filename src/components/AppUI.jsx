@@ -7,6 +7,7 @@ import { Card } from './Card'
 import { useTodos } from '../hooks/useTodos'
 import { Modal } from './Modal'
 import { TodoForm } from './TodoForm'
+import { EmptyState } from './EmptyState'
 
 
 const AppUI = () => {
@@ -18,12 +19,10 @@ const AppUI = () => {
             <TodoList>
                 {error && <p>Oops! Something went wrong...</p>}
                 {loading && <p>Loading...</p>}
-                {(!loading && !todosFiltered.length && searchInput === '') && <p>Create your first to do...</p>}
+                {(!loading && !todosFiltered.length && searchInput === '') && <EmptyState />}
                 {todosFiltered.map(todo => (<TodoItem key={todo.text} text={todo.text} />))}
             </TodoList>
-
             {!!openModal && <Modal><TodoForm /></Modal>}
-
             <CreateTodoButtom />
         </Card>
     )
