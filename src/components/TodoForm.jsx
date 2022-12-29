@@ -38,6 +38,7 @@ const TodoForm = () => {
         <form onSubmit={onSubmit} className='flex flex-col justify-center bg-white shadow-lg rounded-xl p-8  mb-4 w-96 h-64'>
             <label className="block text-gray-700 text-2xl font-bold mb-2">Write one thing to do</label>
             <textarea
+                autoFocus
                 onKeyDown={onEnterPress}
                 className={`${error ? 'border border-red-500' : 'border-none'} h-20 resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                 placeholder="Cut onions for lunch"

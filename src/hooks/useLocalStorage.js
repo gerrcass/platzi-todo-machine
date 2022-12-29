@@ -22,6 +22,10 @@ const useLocalStorage = () => {
             setError(true)
         }
         setLoading(false)
+
+        /* return ()=>{
+            removeLocalStorage()
+        } */
     }, [])
 
     const removeLocalStorage = () => {
