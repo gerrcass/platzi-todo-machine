@@ -7,9 +7,7 @@ const TodosContext = createContext()
 const TodosProvider = ({ children }) => {
 
     const { item: todos, setItem: setTodos, loading, error } = useLocalStorage()
-    //const [todos, setTodos] = useState(initialState)
 
-    //const [todosFiltered, setTodosFiltered] = useState(initialState)
     const [searchInput, setSearchInput] = useState('')
 
 
@@ -18,7 +16,6 @@ const TodosProvider = ({ children }) => {
         todosFiltered = todos
     } else {
         todosFiltered = todos.filter(todo => todo.text.toLowerCase().includes(searchInput.toLowerCase()))
-
     }
 
 
@@ -27,14 +24,9 @@ const TodosProvider = ({ children }) => {
 
     const completedTodos = todos.filter(todo => todo.completed === true).length
 
-    const setSearchTodo = (searchInput) => {
-        const newTodos = todos.filter(todo => todo.text.toLowerCase().includes(searchInput.toLowerCase()))
-        setTodosFiltered(newTodos)
-    }
-
     const completeTodo = (text) => {
-        const newTodos = todos.filter(todo => {
-            if (todo.text === text) return { ...todo, completed: !todo.completed }
+        const newTodos = todos.map(todo => {
+            return todo.text === text ? { ...todo, completed: !todo.completed } : todo
 
         })
         setTodos(newTodos)

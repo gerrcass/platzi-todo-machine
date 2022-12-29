@@ -6,6 +6,9 @@ const initialState = [
     { text: "Cry with the weeping woman", completed: true }
 ];
 
+const localStorageKey = 'TODO_MACHINE_APP'
+const todosLocalStorage = localStorage.getItem(localStorageKey)
+
 const useLocalStorage = () => {
     const [item, setItem] = useState(initialState)
     const [loading, setLoading] = useState(true)
@@ -13,22 +16,22 @@ const useLocalStorage = () => {
 
     useEffect(() => {
         try {
-            if (localStorage.getItem('TODO_MACHINE_APP')) {
-
-            } else {
-                localStorage.setItem('TODO_MACHINE_APP', JSON.stringify([]))
-            }
-
+            todosLocalStorage ? setItem(JSON.parse(todosLocalStorage)) : setItem(initialState)
         } catch (error) {
             console.log(error)
             setError(true)
         }
-
         setLoading(false)
     }, [])
 
+    const removeLocalStorage = () => {
+        localStorage.removeItem(localStorageKey)
+    }
+    const updateLocalStorage = (todos) => {
+        localStorage.setItem(localStorageKey, JSON.stringify(todos))
+    }
 
-    return { item, setItem, loading, error }
+    return { item, setItem, loading, error, removeLocalStorage, updateLocalStorage }
 }
 
 export { useLocalStorage }

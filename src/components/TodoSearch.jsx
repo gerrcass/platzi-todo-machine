@@ -1,10 +1,7 @@
 import { useTodos } from "../hooks/useTodos"
 
 const TodoSearch = () => {
-    //const [search, setSearch] = useState('')
     const { searchInput, setSearchInput } = useTodos()
-
-
 
     const handleChange = (e) => {
         setSearchInput(e.target.value)
