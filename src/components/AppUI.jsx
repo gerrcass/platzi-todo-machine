@@ -19,7 +19,8 @@ const AppUI = () => {
             <TodoList>
                 {error && <p>Oops! Something went wrong...</p>}
                 {loading && <p>Loading...</p>}
-                {(!loading && !todosFiltered.length && searchInput === '') && <EmptyState />}
+                {(!loading && !todosFiltered.length && searchInput === '') && <EmptyState state='WELCOME' />}
+                {(searchInput && todosFiltered.length) === 0 && <EmptyState state='NO_RESULTS' />}
                 {todosFiltered.map(todo => (<TodoItem key={todo.text} text={todo.text} />))}
             </TodoList>
             {!!openModal && <Modal><TodoForm /></Modal>}
