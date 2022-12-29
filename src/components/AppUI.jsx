@@ -5,10 +5,11 @@ import { TodoItem } from './TodoItem'
 import { CreateTodoButtom } from './CreateTodoButtom'
 import { Card } from './Card'
 import { useTodos } from '../hooks/useTodos'
+import { Modal } from './Modal'
 
 
 const AppUI = () => {
-    const { loading, error, todosFiltered, searchInput } = useTodos()
+    const { loading, error, todosFiltered, searchInput, openModal, setOpenModal } = useTodos()
     return (
         <Card>
             <TodoCounter />
@@ -19,6 +20,8 @@ const AppUI = () => {
                 {(!loading && !todosFiltered.length && searchInput === '') && <p>Create your first to do...</p>}
                 {todosFiltered.map(todo => (<TodoItem key={todo.text} text={todo.text} />))}
             </TodoList>
+
+            {!!openModal && <Modal />}
             <CreateTodoButtom />
         </Card>
     )

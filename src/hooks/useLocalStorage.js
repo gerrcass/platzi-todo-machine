@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 const initialState = [
     { text: "Cut onions", completed: false },
-    { text: "Take the React's introcourse", completed: false },
+    { text: "Take the React's intro course", completed: false },
     { text: "Cry with the weeping woman", completed: true }
 ];
 

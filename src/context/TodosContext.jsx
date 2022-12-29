@@ -7,8 +7,10 @@ const TodosContext = createContext()
 const TodosProvider = ({ children }) => {
 
     const { item: todos, setItem: setTodos, loading, error } = useLocalStorage()
-
     const [searchInput, setSearchInput] = useState('')
+    const [openModal, setOpenModal] = useState(false)
+
+
 
 
     let todosFiltered = []
@@ -24,6 +26,15 @@ const TodosProvider = ({ children }) => {
 
     const completedTodos = todos.filter(todo => todo.completed === true).length
 
+    const addTodo = (text) => {
+        const todoAlreadyExist = todos.some(todo => todo.text.toLowerCase().includes(text.toLowerCase()))
+        if (todoAlreadyExist) {
+            alert('Todo already exist!')
+        } else {
+            setTodos([...todos, { text, completed: false }])
+        }
+    }
+
     const completeTodo = (text) => {
         const newTodos = todos.map(todo => {
             return todo.text === text ? { ...todo, completed: !todo.completed } : todo
@@ -38,7 +49,7 @@ const TodosProvider = ({ children }) => {
     }
 
     return (
-        <TodosContext.Provider value={{ loading, error, todosFiltered, count, completedTodos, searchInput, setSearchInput, completeTodo, deleteTodo }}>
+        <TodosContext.Provider value={{ loading, error, openModal, setOpenModal, todosFiltered, count, completedTodos, searchInput, setSearchInput, addTodo, completeTodo, deleteTodo }}>
             {children}
         </TodosContext.Provider>
     )
