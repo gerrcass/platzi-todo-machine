@@ -23,7 +23,6 @@ const TodoSearch = () => {
                     value={searchInput}
                     onChange={handleChange}
                 />
-
             </div>
         </>
     )
