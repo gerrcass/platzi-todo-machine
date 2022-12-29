@@ -44,7 +44,8 @@ const TodosProvider = ({ children }) => {
     }
 
     return (
-        <TodosContext.Provider value={{ loading, error, openModal, setOpenModal, todosFiltered, count, completedTodos, searchInput, setSearchInput, addTodo, completeTodo, deleteTodo }}>
+        <TodosContext.Provider
+            value={{ loading, error, openModal, setOpenModal, todosFiltered, count, completedTodos, searchInput, setSearchInput, addTodo, completeTodo, deleteTodo }}>
             {children}
         </TodosContext.Provider>
     )

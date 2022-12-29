@@ -1,8 +1,12 @@
+import { motion } from "framer-motion"
 
 const LoadingState = () => {
 
     return (
-        <div className="flex items-center justify-center py-4">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center justify-center py-4">
             <div className="flex flex-col items-center mx-10">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +17,7 @@ const LoadingState = () => {
                 </svg>
                 <p className="font-bold w-64 text-gray-400">Loading...</p>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

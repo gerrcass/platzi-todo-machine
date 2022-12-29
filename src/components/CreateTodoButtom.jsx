@@ -1,10 +1,13 @@
 import { useTodos } from "../hooks/useTodos"
-
+import { motion } from "framer-motion"
 const CreateTodoButtom = () => {
     const { setOpenModal } = useTodos()
     return (
         <>
-            <button
+            <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
                 autoFocus
                 className="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-transparent font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-900 ml-2"
                 type="button"
@@ -14,7 +17,7 @@ const CreateTodoButtom = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
                 <span className="sr-only">Add</span>
-            </button>
+            </motion.button>
         </>
     )
 }

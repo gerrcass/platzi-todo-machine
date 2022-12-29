@@ -11,7 +11,6 @@ import { EmptyState } from './EmptyState'
 import { ErrorState } from './ErrorState'
 import { LoadingState } from './LoadingState'
 
-
 const AppUI = () => {
     const { loading, error, todosFiltered, searchInput, openModal } = useTodos()
 
@@ -24,7 +23,7 @@ const AppUI = () => {
                 {loading && <LoadingState />}
                 {!error && !loading && todosFiltered.length === 0 && searchInput === '' && <EmptyState state='WELCOME' />}
                 {!error && !loading && searchInput && todosFiltered.length === 0 && <EmptyState state='NO_RESULTS' />}
-                {!error && !loading && todosFiltered.map(todo => (<TodoItem key={todo.text} text={todo.text} />))}
+                {!error && !loading && todosFiltered.map((todo, index) => (<TodoItem key={todo.text} index={index} text={todo.text} />))}
             </TodoList>
             {!!openModal && <Modal><TodoForm /></Modal>}
             <CreateTodoButtom />
