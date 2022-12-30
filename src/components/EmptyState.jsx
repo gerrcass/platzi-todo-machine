@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 
-const EmptyState = ({ state }) => {
+const EmptyState = ({ state, searchText }) => {
 
     return (
         <motion.div
@@ -18,7 +18,7 @@ const EmptyState = ({ state }) => {
                 }
                 <p className="font-bold w-64">
                     {state === 'WELCOME' && 'This is a good time to start writing down your To Dos.'}
-                    {state === 'NO_RESULTS' && 'Oops, no results found.'}
+                    {state === 'NO_RESULTS' && `Oops, no results found for ${searchText}`}
                 </p>
                 {state === 'WELCOME' && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mt-2 w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />

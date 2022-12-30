@@ -12,7 +12,6 @@ import { ErrorState } from './components/ErrorState'
 import { LoadingState } from './components/LoadingState'
 
 import { useTodos } from './hooks/useTodos'
-
 function App() {
 
   const {
@@ -36,13 +35,47 @@ function App() {
         <TodoCounter
           count={count}
           completedTodos={completedTodos}
+          loading={loading}
         />
         <TodoSearch
           searchInput={searchInput}
           setSearchInput={setSearchInput}
+          loading={loading}
         />
       </TodoHeader>
-      <TodoList>
+
+      <TodoList
+        error={error}
+        loading={loading}
+        todosFiltered={todosFiltered}
+        count={count}
+        onError={() => <ErrorState />}
+        onLoading={() => <LoadingState />}
+        onEmptyTodos={() => <EmptyState state='WELCOME' />}
+        onNoSearchResults={() => <EmptyState searchText={searchInput} state='NO_RESULTS' />}
+      /* render={(todo, index) => (
+        <TodoItem
+          key={todo.text}
+          index={index}
+          text={todo.text}
+          completeTodo={completeTodo}
+          deleteTodo={deleteTodo}
+          todosFiltered={todosFiltered}
+        />)
+      } */
+      >
+        {(todo, index) => (
+          <TodoItem
+            key={todo.text}
+            index={index}
+            text={todo.text}
+            completeTodo={completeTodo}
+            deleteTodo={deleteTodo}
+            todosFiltered={todosFiltered}
+          />)}
+      </TodoList>
+
+      {/* <TodoList>
         {error && <ErrorState />}
         {loading && <LoadingState />}
         {!loading && todosFiltered.length === 0 && searchInput === '' && <EmptyState state='WELCOME' />}
@@ -58,7 +91,8 @@ function App() {
             todosFiltered={todosFiltered}
           />
         ))}
-      </TodoList>
+      </TodoList> */}
+
       {!!openModal && (
         <Modal>
           <TodoForm
@@ -68,7 +102,9 @@ function App() {
         </Modal>
       )}
 
-      <CreateTodoButtom setOpenModal={setOpenModal} />
+      <CreateTodoButtom
+        setOpenModal={setOpenModal}
+      />
     </Card>
   )
 }

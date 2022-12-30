@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-const TodoSearch = ({ searchInput, setSearchInput }) => {
+const TodoSearch = ({ searchInput, setSearchInput, loading }) => {
 
     const handleChange = (e) => {
         setSearchInput(e.target.value)
@@ -18,12 +18,13 @@ const TodoSearch = ({ searchInput, setSearchInput }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
-                    className="h-full w-full outline-none text-sm text-gray-700 pr-2"
+                    className="h-full w-full outline-none text-sm bg-white text-gray-700 pr-2 disabled:placeholder-gray-200"
                     type="text"
                     placeholder="Search todo..."
                     autoComplete="off"
                     value={searchInput}
                     onChange={handleChange}
+                    disabled={loading}
                 />
             </div>
         </>
