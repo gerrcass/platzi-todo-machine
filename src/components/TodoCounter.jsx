@@ -1,8 +1,6 @@
-import { useTodos } from "../hooks/useTodos"
 import { motion } from 'framer-motion'
 
-const TodoCounter = () => {
-    const { completedTodos, count } = useTodos()
+const TodoCounter = ({ completedTodos, count }) => {
 
     const percentage = completedTodos / (count || 1) * 100
 

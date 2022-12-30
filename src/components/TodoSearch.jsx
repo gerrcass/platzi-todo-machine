@@ -1,8 +1,6 @@
-import { useTodos } from "../hooks/useTodos"
 import { motion } from 'framer-motion'
 
-const TodoSearch = () => {
-    const { searchInput, setSearchInput } = useTodos()
+const TodoSearch = ({ searchInput, setSearchInput }) => {
 
     const handleChange = (e) => {
         setSearchInput(e.target.value)

@@ -1,7 +1,6 @@
-import { useTodos } from "../hooks/useTodos"
 import { motion } from "framer-motion"
-const CreateTodoButtom = () => {
-    const { setOpenModal } = useTodos()
+
+const CreateTodoButtom = ({ setOpenModal }) => {
     return (
         <>
             <motion.button

@@ -1,8 +1,6 @@
 import { useState } from "react"
-import { useTodos } from "../hooks/useTodos"
 
-const TodoForm = () => {
-    const { setOpenModal, addTodo } = useTodos()
+const TodoForm = ({ setOpenModal, addTodo }) => {
     const [newTodoItem, setNewTodoItem] = useState('')
     const [error, setError] = useState('')
 

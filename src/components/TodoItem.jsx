@@ -1,4 +1,3 @@
-import { useTodos } from "../hooks/useTodos"
 import { motion } from "framer-motion"
 
 const itemsVariants = {
@@ -9,9 +8,10 @@ const itemsVariants = {
     })
 }
 
-const TodoItem = ({ text, index }) => {
-    const { completeTodo, deleteTodo, todosFiltered } = useTodos()
+const TodoItem = ({ text, index, completeTodo, deleteTodo, todosFiltered }) => {
+
     const isTodoCompleted = todosFiltered.some(todo => todo.text === text && todo.completed === true)
+
     return (
         <motion.li
             key={index}
