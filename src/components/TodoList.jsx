@@ -11,7 +11,7 @@ const TodoList = (props) => {
 
                 <ul className="flex flex-col rounded-xl bg-white shadow-2xl text-gray-700">
                     {/* <AnimatePresence> */}
-                    {!props.loading && props.todosFiltered.map(props.render || props.children)}
+                    {!props.loading && !props.error && props.todosFiltered.map(props.render || props.children)}
                     {/* </AnimatePresence> */}
                 </ul>
 

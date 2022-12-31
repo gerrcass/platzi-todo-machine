@@ -10,7 +10,9 @@ import { TodoForm } from './components/TodoForm'
 import { EmptyState } from './components/EmptyState'
 import { ErrorState } from './components/ErrorState'
 import { LoadingState } from './components/LoadingState'
-import { ChangeAlertWithStorageListener } from './components/ChangeAlert'
+
+import { ChangeAlertWithStorageListener } from './components/ChangeAlert' //👈 using HOC
+//import { ChangeAlert } from './components/ChangeAlert' //👈 using Custom Hook
 
 import { useTodos } from './hooks/useTodos'
 
@@ -90,9 +92,13 @@ function App() {
       />
 
       <ChangeAlertWithStorageListener
-        sincronize={synchronizeTodos}
+        synchronize={synchronizeTodos}
         setOpenModal={setOpenModal}
       />
+      {/* <ChangeAlert
+        synchronize={synchronizeTodos}
+        setOpenModal={setOpenModal}
+      /> */}
     </Card>
   )
 }

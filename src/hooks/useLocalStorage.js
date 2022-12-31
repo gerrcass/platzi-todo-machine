@@ -9,22 +9,17 @@ const initialState = [
 const localStorageKey = 'TODO_MACHINE_APP'
 
 const useLocalStorage = () => {
-    const [item, setItem] = useState(initialState)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [item, setItem] = useState(initialState)
+    
     const [synchronizedItem, setSynchronizedItem] = useState(true)
-
-    const syncItem = () => {
-        setLoading(true)
-        setSynchronizedItem(false) //👈 this triggers useEffect because of its dependencies [sincronizedItem]
-    }
     useEffect(() => {
         //setTimeout for testing loading state 👉 <ErrorState />
-        console.log('ME EJECUTE')
         setTimeout(() => {
             try {
                 const todosLocalStorage = localStorage.getItem(localStorageKey)
-                todosLocalStorage ? setItem(JSON.parse(todosLocalStorage)) : setItem(initialState)
+                todosLocalStorage ? saveItems(JSON.parse(todosLocalStorage)) : saveItems(initialState)
             } catch (error) {
                 console.log(error)
                 setError(true)
@@ -34,11 +29,17 @@ const useLocalStorage = () => {
         }, 500)
     }, [synchronizedItem])
 
-    useEffect(() => {
+    const saveItems = (item) => {
+        setItem(item)
         localStorage.setItem(localStorageKey, JSON.stringify(item))
-    }, [item])
+      }
+    
+    const syncItem = () => {
+        setLoading(true)
+        setSynchronizedItem(false) //👈 this triggers useEffect because of its dependencies [sincronizedItem]
+    }
 
-    return { item, setItem, loading, error, syncItem }
+    return { item, loading, error, saveItems,syncItem }
 }
 
 export { useLocalStorage, localStorageKey }
