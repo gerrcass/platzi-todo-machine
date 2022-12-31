@@ -10,8 +10,10 @@ import { TodoForm } from './components/TodoForm'
 import { EmptyState } from './components/EmptyState'
 import { ErrorState } from './components/ErrorState'
 import { LoadingState } from './components/LoadingState'
+import { ChangeAlertWithStorageListener } from './components/ChangeAlert'
 
 import { useTodos } from './hooks/useTodos'
+
 function App() {
 
   const {
@@ -26,21 +28,20 @@ function App() {
     completeTodo,
     deleteTodo,
     setOpenModal,
-    addTodo
+    addTodo,
+    synchronizeTodos
   } = useTodos()
 
   return (
     <Card>
-      <TodoHeader>
+      <TodoHeader loading={loading}>
         <TodoCounter
           count={count}
           completedTodos={completedTodos}
-          loading={loading}
         />
         <TodoSearch
           searchInput={searchInput}
           setSearchInput={setSearchInput}
-          loading={loading}
         />
       </TodoHeader>
 
@@ -75,24 +76,6 @@ function App() {
           />)}
       </TodoList>
 
-      {/* <TodoList>
-        {error && <ErrorState />}
-        {loading && <LoadingState />}
-        {!loading && todosFiltered.length === 0 && searchInput === '' && <EmptyState state='WELCOME' />}
-        {searchInput && todosFiltered.length === 0 && <EmptyState state='NO_RESULTS' />}
-
-        {todosFiltered.map((todo, index) => (
-          <TodoItem
-            key={todo.text}
-            index={index}
-            text={todo.text}
-            completeTodo={completeTodo}
-            deleteTodo={deleteTodo}
-            todosFiltered={todosFiltered}
-          />
-        ))}
-      </TodoList> */}
-
       {!!openModal && (
         <Modal>
           <TodoForm
@@ -103,6 +86,11 @@ function App() {
       )}
 
       <CreateTodoButtom
+        setOpenModal={setOpenModal}
+      />
+
+      <ChangeAlertWithStorageListener
+        sincronize={synchronizeTodos}
         setOpenModal={setOpenModal}
       />
     </Card>

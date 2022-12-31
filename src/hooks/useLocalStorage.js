@@ -7,30 +7,38 @@ const initialState = [
 ];
 
 const localStorageKey = 'TODO_MACHINE_APP'
-const todosLocalStorage = localStorage.getItem(localStorageKey)
 
 const useLocalStorage = () => {
-    const [item, setItem] = useState([])
+    const [item, setItem] = useState(initialState)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [synchronizedItem, setSynchronizedItem] = useState(true)
+
+    const syncItem = () => {
+        setLoading(true)
+        setSynchronizedItem(false) //👈 this triggers useEffect because of its dependencies [sincronizedItem]
+    }
+    useEffect(() => {
+        //setTimeout for testing loading state 👉 <ErrorState />
+        console.log('ME EJECUTE')
+        setTimeout(() => {
+            try {
+                const todosLocalStorage = localStorage.getItem(localStorageKey)
+                todosLocalStorage ? setItem(JSON.parse(todosLocalStorage)) : setItem(initialState)
+            } catch (error) {
+                console.log(error)
+                setError(true)
+            }
+            setLoading(false)
+            setSynchronizedItem(true)
+        }, 500)
+    }, [synchronizedItem])
 
     useEffect(() => {
-        try {
-            //throw new Error('Testing <ErrorState /> component')
-            todosLocalStorage ? setItem(JSON.parse(todosLocalStorage)) : setItem(initialState)
-
-        } catch (error) {
-            console.log(error)
-            setError(true)
-        }
-        setLoading(false) //set 'true' for testing <LoadingState />
-    },[])
-
-    useEffect(()=>{
         localStorage.setItem(localStorageKey, JSON.stringify(item))
-    },[item])
+    }, [item])
 
-    return { item, setItem, loading, error }
+    return { item, setItem, loading, error, syncItem }
 }
 
-export { useLocalStorage }
+export { useLocalStorage, localStorageKey }
